@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="root" prefHeight="800.0" prefWidth="1200.0" styleClass="root" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spectrum.analyzer.software.SpectrumAnalyzerController">
+    <!-- Header -->
+    <top>
+        <HBox alignment="CENTER" styleClass="header">
+            <padding>
+                <Insets top="10" bottom="10"/>
+            </padding>
+            <Label text="Spectrum Analyzer" styleClass="header-label"/>
+        </HBox>
+    </top>
+
+    <!-- Center: Canvas Area -->
+    <center>
+        <VBox alignment="CENTER" spacing="15" styleClass="canvas-container">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <VBox fx:id="canvasContainer" alignment="CENTER" minHeight="400" prefHeight="400" maxHeight="400"/>
+            <VBox fx:id="demodCanvasContainer" alignment="CENTER" minHeight="150" prefHeight="150" maxHeight="150"/>
+        </VBox>
+    </center>
+
+    <!-- Right: Control Panel -->
+    <right>
+        <ScrollPane fx:id="controlPanel" prefWidth="350" styleClass="scroll-pane">
+            <content>
+                <VBox spacing="10" styleClass="control-panel">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                    <!-- Frequency Control -->
+                    <TitledPane text="Frequency Control" styleClass="titled-pane">
+                        <content>
+                            <GridPane hgap="10" vgap="10" styleClass="grid-pane">
+                                <padding>
+                                    <Insets top="10" right="10" bottom="10" left="10"/>
+                                </padding>
+                                <Label fx:id="frequencyLabel" text="Max Freq: 1000.00 Hz" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                                <Slider fx:id="frequencySlider" min="20" max="50000000000" value="1000" prefWidth="300" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                                    <tooltip>
+                                        <Tooltip text="Adjust maximum frequency (20 Hz to 50 GHz)"/>
+                                    </tooltip>
+                                </Slider>
+                            </GridPane>
+                        </content>
+                    </TitledPane>
+                    <!-- Dynamic Range -->
+                    <TitledPane text="Dynamic Range" styleClass="titled-pane">
+                        <content>
+                            <GridPane hgap="10" vgap="10" styleClass="grid-pane">
+                                <padding>
+                                    <Insets top="10" right="10" bottom="10" left="10"/>
+                                </padding>
+                                <Label fx:id="dynamicRangeLabel" text="Dynamic Range: 160 dB" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                                <Slider fx:id="dynamicRangeSlider" min="100" max="200" value="160" prefWidth="300" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                                    <tooltip>
+                                        <Tooltip text="Set dynamic range (100 to 200 dB)"/>
+                                    </tooltip>
+                                </Slider>
+                            </GridPane>
+                        </content>
+                    </TitledPane>
+                    <!-- Sweep Speed -->
+                    <TitledPane text="Sweep Speed" styleClass="titled-pane">
+                        <content>
+                            <GridPane hgap="10" vgap="10" styleClass="grid-pane">
+                                <padding>
+                                    <Insets top="10" right="10" bottom="10" left="10"/>
+                                </padding>
+                                <Slider fx:id="sweepSpeedSlider" min="0.1" max="10.0" value="1.0" prefWidth="300" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                                    <tooltip>
+                                        <Tooltip text="Adjust sweep speed (0.1 to 10)"/>
+                                    </tooltip>
+                                </Slider>
+                            </GridPane>
+                        </content>
+                    </TitledPane>
+                    <!-- Display Settings -->
+                    <TitledPane text="Display Settings" styleClass="titled-pane">
+                        <content>
+                            <GridPane hgap="10" vgap="10" styleClass="grid-pane">
+                                <padding>
+                                    <Insets top="10" right="10" bottom="10" left="10"/>
+                                </padding>
+                                <Label text="Display Mode" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <ComboBox fx:id="modeComboBox" prefWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                                    <tooltip>
+                                        <Tooltip text="Select display mode: Spectrum or Persistence"/>
+                                    </tooltip>
+                                </ComboBox>
+                                <Label text="Analysis Mode" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <ComboBox fx:id="analysisModeComboBox" prefWidth="200" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                                    <tooltip>
+                                        <Tooltip text="Select analysis mode: FFT or Swept-Tuned"/>
+                                    </tooltip>
+                                </ComboBox>
+                                <Label text="Window Function" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <ComboBox fx:id="windowComboBox" prefWidth="200" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                                    <tooltip>
+                                        <Tooltip text="Select window function for spectral analysis"/>
+                                    </tooltip>
+                                </ComboBox>
+                                <Label fx:id="windowInfoLabel" text="Window Info: Sidelobe: -31 dB, Resolution: Moderate" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                                <Label text="Demodulation" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                                <ComboBox fx:id="demodulationComboBox" prefWidth="200" GridPane.rowIndex="4" GridPane.columnIndex="1">
+                                    <tooltip>
+                                        <Tooltip text="Select demodulation type"/>
+                                    </tooltip>
+                                </ComboBox>
+                                <ToggleButton fx:id="logScaleToggle" text="Log Scale" GridPane.rowIndex="5" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                                    <tooltip>
+                                        <Tooltip text="Toggle logarithmic frequency scale"/>
+                                    </tooltip>
+                                </ToggleButton>
+                            </GridPane>
+                        </content>
+                    </TitledPane>
+                    <!-- Channel Settings -->
+                    <TitledPane text="Channel Settings" styleClass="titled-pane">
+                        <content>
+                            <GridPane hgap="10" vgap="10" styleClass="grid-pane">
+                                <padding>
+                                    <Insets top="10" right="10" bottom="10" left="10"/>
+                                </padding>
+                                <Label text="Channel Bandwidth (Hz)" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <TextField fx:id="channelBandwidthField" text="1000" prefWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                                    <tooltip>
+                                        <Tooltip text="Set channel bandwidth in Hz"/>
+                                    </tooltip>
+                                </TextField>
+                                <Label text="Channel Count" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <TextField fx:id="channelCountField" text="1" prefWidth="200" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                                    <tooltip>
+                                        <Tooltip text="Set number of channels (1 to 5)"/>
+                                    </tooltip>
+                                </TextField>
+                            </GridPane>
+                        </content>
+                    </TitledPane>
+                    <!-- Plot Controls -->
+                    <TitledPane text="Plot Controls" styleClass="titled-pane">
+                        <content>
+                            <GridPane hgap="10" vgap="10" styleClass="grid-pane">
+                                <padding>
+                                    <Insets top="10" right="10" bottom="10" left="10"/>
+                                </padding>
+                                <Button fx:id="resetZoomButton" text="Reset Zoom/Pan" onAction="#resetZoomPan" prefWidth="140" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                                    <tooltip>
+                                        <Tooltip text="Reset zoom and pan to default view"/>
+                                    </tooltip>
+                                </Button>
+                                <Button fx:id="addMarkerButton" text="Add Marker" onAction="#addMarker" prefWidth="140" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                                    <tooltip>
+                                        <Tooltip text="Add a marker at the center frequency"/>
+                                    </tooltip>
+                                </Button>
+                                <Button fx:id="clearMarkersButton" text="Clear Markers" onAction="#clearMarkers" prefWidth="140" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                                    <tooltip>
+                                        <Tooltip text="Remove all markers from the plot"/>
+                                    </tooltip>
+                                </Button>
+                            </GridPane>
+                        </content>
+                    </TitledPane>
+                    <!-- Annotations -->
+                    <TitledPane text="Annotations" styleClass="titled-pane">
+                        <content>
+                            <GridPane hgap="10" vgap="10" styleClass="grid-pane">
+                                <padding>
+                                    <Insets top="10" right="10" bottom="10" left="10"/>
+                                </padding>
+                                <ToggleButton fx:id="gridToggle" text="Show Grid" selected="true" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                                    <tooltip>
+                                        <Tooltip text="Toggle grid visibility on the spectrum plot"/>
+                                    </tooltip>
+                                </ToggleButton>
+                                <Label text="Grid Spacing" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <Slider fx:id="gridSpacingSlider" min="5" max="20" value="10" prefWidth="200" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                                    <tooltip>
+                                        <Tooltip text="Adjust number of grid lines (5 to 20)"/>
+                                    </tooltip>
+                                </Slider>
+                                <Label text="Annotation Text" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <TextField fx:id="annotationTextField" prefWidth="200" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                                    <tooltip>
+                                        <Tooltip text="Enter text for annotation"/>
+                                    </tooltip>
+                                </TextField>
+                                <Button fx:id="addAnnotationButton" text="Add Annotation" onAction="#addAnnotation" prefWidth="140" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                                    <tooltip>
+                                        <Tooltip text="Add annotation at center of plot"/>
+                                    </tooltip>
+                                </Button>
+                            </GridPane>
+                        </content>
+                    </TitledPane>
+                    <!-- Metrics -->
+                    <TitledPane text="Metrics" styleClass="titled-pane">
+                        <content>
+                            <GridPane hgap="10" vgap="10" styleClass="grid-pane">
+                                <padding>
+                                    <Insets top="10" right="10" bottom="10" left="10"/>
+                                </padding>
+                                <Label fx:id="channelPowerLabel" text="Channel Power: 0.00 dBm" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                                <Label fx:id="acprLabel" text="ACPR: 0.00 dB" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                                <Label fx:id="signalTypeLabel" text="Signal Type: Unknown" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                                <TableView fx:id="metricsTable" prefHeight="150" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                                    <columns>
+                                        <TableColumn fx:id="typeColumn" text="Type" prefWidth="80"/>
+                                        <TableColumn fx:id="frequencyColumn" text="Frequency (Hz)" prefWidth="100"/>
+                                        <TableColumn fx:id="amplitudeColumn" text="Amplitude (dBm)" prefWidth="100"/>
+                                        <TableColumn fx:id="signalTypeColumn" text="Signal Type" prefWidth="100"/>
+                                    </columns>
+                                </TableView>
+                            </GridPane>
+                        </content>
+                    </TitledPane>
+                    <!-- Actions -->
+                    <TitledPane text="Actions" styleClass="titled-pane">
+                        <content>
+                            <GridPane hgap="10" vgap="10" styleClass="grid-pane">
+                                <padding>
+                                    <Insets top="10" right="10" bottom="10" left="10"/>
+                                </padding>
+                                <Button fx:id="exportButton" text="Export Report" onAction="#exportPowerReport" prefWidth="140" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                                    <tooltip>
+                                        <Tooltip text="Export power report to CSV"/>
+                                    </tooltip>
+                                </Button>
+                                <Button fx:id="resetButton" text="Reset Settings" onAction="#resetSettings" prefWidth="140" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                                    <tooltip>
+                                        <Tooltip text="Reset all settings to default"/>
+                                    </tooltip>
+                                </Button>
+                            </GridPane>
+                        </content>
+                    </TitledPane>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </right>
+</BorderPane>
