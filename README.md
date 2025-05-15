@@ -65,3 +65,6 @@ _This software is an enhanced version of Spectrum Analyzer, a software I wrote p
 |-----|-----|------|
 | ![](https://github.com/KMORaza/Spectrum_Analyzer_Software--enhanced/blob/main/Spectrum%20Analyzer%20-%20Enhanced/src/screenshots/screen%20(4).png) | ![](https://github.com/KMORaza/Spectrum_Analyzer_Software--enhanced/blob/main/Spectrum%20Analyzer%20-%20Enhanced/src/screenshots/screen%20(5).png) | ![](https://github.com/KMORaza/Spectrum_Analyzer_Software--enhanced/blob/main/Spectrum%20Analyzer%20-%20Enhanced/src/screenshots/screen%20(6).png) |
 | ![](https://github.com/KMORaza/Spectrum_Analyzer_Software--enhanced/blob/main/Spectrum%20Analyzer%20-%20Enhanced/src/screenshots/screen%20(7).png) | ![](https://github.com/KMORaza/Spectrum_Analyzer_Software--enhanced/blob/main/Spectrum%20Analyzer%20-%20Enhanced/src/screenshots/screen%20(8).png) | ![](https://github.com/KMORaza/Spectrum_Analyzer_Software--enhanced/blob/main/Spectrum%20Analyzer%20-%20Enhanced/src/screenshots/screen%20(9).png) |
+
+
+---
