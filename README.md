@@ -14,7 +14,7 @@ _This software is an enhanced version of Spectrum Analyzer, a software I wrote p
 - `SignalProcessor` sets window function (Hanning, Blackman-Harris, Kaiser, Flat-Top, Gaussian) via `setWindowFunction` and regenerates data
 - `SignalProcessor` sets demodulation type (None, AM, FM, PM, QAM, PSK, OFDM) via `setDemodulationType` and regenerates data
 - `SignalProcessor` sets sweep speed via `setSweepSpeed`, scales amplitudes in Swept-Tuned mode, and regenerates data
-- `SignalProcessor` generates simulated data with noise floor (-160 - 20 * log10(`maxFreq` / 1000)) and Gaussian peaks for Wi-Fi (150 Hz, +100 dB), Bluetooth (2440 MHz, +80 dB), LTE (1800 MHz, +90 dB), 5G NR (3600 MHz, +85 dB), Zigbee (2425 MHz, +75 dB)
+- `SignalProcessor` generates simulated data with noise floor (`-160 - 20 * log10(maxFreq/1000)`) and Gaussian peaks for Wi-Fi (150 Hz, +100 dB), Bluetooth (2440 MHz, +80 dB), LTE (1800 MHz, +90 dB), 5G NR (3600 MHz, +85 dB), Zigbee (2425 MHz, +75 dB)
 - `SignalProcessor` applies window function to amplitudes, generates random phases (0 to 2π), and demodulates if enabled
 - `SignalProcessor` generates window function array in parallel using `IntStream` for Hanning, Blackman-Harris, Kaiser, Flat-Top, or Gaussian
 - `SignalProcessor` computes modified Bessel function (`besselI0`) for Kaiser window
